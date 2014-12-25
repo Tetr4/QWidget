@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
-    modelDirectory="/QWidget/src" modelPluginID="QWidget" modelName="QWidget"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/QWidget/src" modelPluginID="QWidget" modelName="QWidget"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>qWidget.ecore</foreignModel>
-  <genPackages prefix="QWidget" disposableProviderFactory="true" ecorePackage="qWidget.ecore#/"/>
+  <genPackages prefix="QWidget" disposableProviderFactory="true" ecorePackage="qWidget.ecore#/">
+    <genClasses ecoreClass="qWidget.ecore#//QMainWindow">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/windowTitle"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qWidget.ecore#//QMainWindow/content"/>
+    </genClasses>
+    <genClasses ecoreClass="qWidget.ecore#//QVBoxLayout"/>
+    <genClasses ecoreClass="qWidget.ecore#//QHBoxLayout"/>
+    <genClasses ecoreClass="qWidget.ecore#//QLayout">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qWidget.ecore#//QLayout/contains"/>
+    </genClasses>
+    <genClasses ecoreClass="qWidget.ecore#//QWidget"/>
+    <genClasses ecoreClass="qWidget.ecore#//QPushButton">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QPushButton/text"/>
+    </genClasses>
+    <genClasses ecoreClass="qWidget.ecore#//QTextEdit"/>
+    <genClasses ecoreClass="qWidget.ecore#//QObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QObject/name"/>
+    </genClasses>
+  </genPackages>
 </genmodel:GenModel>

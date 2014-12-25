@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    name="qWidget" nsURI="http://www.example.org/qWidget" nsPrefix="qWidget"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qWidget" nsURI="http://www.example.org/qWidget" nsPrefix="qWidget">
+  <eClassifiers xsi:type="ecore:EClass" name="QMainWindow">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="400"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="300"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="windowTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" lowerBound="1"
+        eType="#//QLayout"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QVBoxLayout" eSuperTypes="#//QLayout"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QHBoxLayout" eSuperTypes="#//QLayout"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QLayout" abstract="true" eSuperTypes="#//QObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        upperBound="-1" eType="#//QObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QWidget" abstract="true" eSuperTypes="#//QObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QPushButton" eSuperTypes="#//QWidget">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QTextEdit" eSuperTypes="#//QWidget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QObject" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
