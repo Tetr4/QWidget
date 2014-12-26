@@ -13,17 +13,28 @@ rule Window {
 			width <- s.width,
 			height <- s.height,
 			content <- s.content
-			--content.anchors_fill = 'parent',
-			--content.margins = 11
 		)
 }
+helper context QWidget!QObject def : isRootElement() : Boolean =
+	self.refImmediateComposite().oclIsTypeOf(QWidget!QMainWindow);
+
 
 rule Object {
 	from
 		s : QWidget!QObject
 	to 
 		t : QtQuick!Item (
-			id <- s.name
+			id <- s.name,
+			
+			anchors_fill <- if (s.isRootElement())
+			then 'parent'
+			else OclUndefined
+			endif,
+			
+			anchors_Margins <- if (s.isRootElement())
+			then 11
+			else OclUndefined
+			endif
 		)
 }
 
@@ -40,16 +51,14 @@ rule verticalLayout extends Layout {
 	from
 		s : QWidget!QVBoxLayout
 	to 
-		t : QtQuick!ColumnLayout (
-		)
+		t : QtQuick!ColumnLayout
 }
 
 rule horizontalLayout extends Layout {
 	from
 		s : QWidget!QHBoxLayout
 	to 
-		t : QtQuick!RowLayout (
-		)
+		t : QtQuick!RowLayout
 }
 
 rule Button extends Object {
