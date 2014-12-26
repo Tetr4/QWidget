@@ -11,12 +11,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/height"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qWidget.ecore#//QMainWindow/windowTitle"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qWidget.ecore#//QMainWindow/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qWidget.ecore#//QMainWindow/content"/>
     </genClasses>
     <genClasses ecoreClass="qWidget.ecore#//QVBoxLayout"/>
     <genClasses ecoreClass="qWidget.ecore#//QHBoxLayout"/>
     <genClasses ecoreClass="qWidget.ecore#//QLayout">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qWidget.ecore#//QLayout/contains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qWidget.ecore#//QLayout/contains"/>
     </genClasses>
     <genClasses ecoreClass="qWidget.ecore#//QWidget"/>
     <genClasses ecoreClass="qWidget.ecore#//QPushButton">
