@@ -1,0 +1,73 @@
+-- @path QWidget=/QWidget/model/qWidget.ecore
+-- @path QtQuick=/QtQuick/model/qtQuick.ecore
+
+module QWidget2QtQuick;
+create OUT : QtQuick from IN : QWidget;
+
+rule Window {
+	from
+		s : QWidget!QMainWindow
+	to 
+		t : QtQuick!ApplicationWindow (
+			title <- s.windowTitle,
+			width <- s.width,
+			height <- s.height,
+			content <- s.content
+			--content.anchors_fill = 'parent',
+			--content.margins = 11
+		)
+}
+
+rule Object {
+	from
+		s : QWidget!QObject
+	to 
+		t : QtQuick!Item (
+			id <- s.name
+		)
+}
+
+rule Layout extends Object {
+	from
+		s : QWidget!QLayout
+	to 
+		t : QtQuick!Item (
+			contains <- s.contains
+		)
+}
+
+rule verticalLayout extends Layout {
+	from
+		s : QWidget!QVBoxLayout
+	to 
+		t : QtQuick!ColumnLayout (
+		)
+}
+
+rule horizontalLayout extends Layout {
+	from
+		s : QWidget!QHBoxLayout
+	to 
+		t : QtQuick!RowLayout (
+		)
+}
+
+rule Button extends Object {
+	from
+		s : QWidget!QPushButton
+	to 
+		t : QtQuick!Button (
+			text <- s.text,
+			Layout_fillWidth <- true
+		)
+}
+
+rule TextArea extends Object {
+	from
+		s : QWidget!QTextEdit
+	to 
+		t : QtQuick!TextArea (
+			Layout_fillHeight <- true,
+			Layout_fillWidth <- true
+		)
+}
