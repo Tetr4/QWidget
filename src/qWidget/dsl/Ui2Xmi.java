@@ -220,14 +220,13 @@ public class Ui2Xmi {
 		List<Element> itemElements = getChildrenByTagName(layoutElement, "item");
 		for(Element curItem:itemElements) {
 			Element innerLayoutElement = getFirstChildByTagName(curItem, "layout");
+			Element innerWidgetElement = getFirstChildByTagName(curItem, "widget");
 			if(innerLayoutElement != null) {
 				// layout
 				QLayout innerLayout = parseLayout(innerLayoutElement);
 				layout.getContains().add(innerLayout);
-				break;
-			} 
-			Element innerWidgetElement = getFirstChildByTagName(curItem, "widget");
-			if(innerWidgetElement != null) {
+			} else if(innerWidgetElement != null) {
+				// widget
 				String widgetClass = innerWidgetElement.getAttribute("class");
 				switch (widgetClass) {
 				case "QTextEdit":
