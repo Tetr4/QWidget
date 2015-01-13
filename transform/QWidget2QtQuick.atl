@@ -31,7 +31,7 @@ rule Object {
 			else OclUndefined
 			endif,
 			
-			anchors_Margins <- if (s.isRootElement())
+			anchors_margins <- if (s.isRootElement())
 			then 11
 			else OclUndefined
 			endif
