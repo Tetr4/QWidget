@@ -39,14 +39,22 @@ public class Ui2Xmi {
 
 	public static void main(String[] args) throws SAXException, IOException,
 			ParserConfigurationException {
+		// parse first args as .ui file path
+		String uiFilePath = "QWidgetSampleUI/mainwindow.ui";
+		String xmiFilePath = "model/QWidgetInstance.xmi";
+		if (args.length > 0) {
+			uiFilePath = args[0];
+		}
+		
 		// Initialize the model
 		QWidgetFactoryImpl.eINSTANCE.eClass();
 		// Retrieve the default factory singleton
 		QWidgetFactory factory = QWidgetFactoryImpl.eINSTANCE;
 
 		// create model
+		System.out.println("Creating model from " + uiFilePath);
 		Ui2Xmi parser = new Ui2Xmi(factory);
-		QMainWindow mainWindow = parser.loadModelFromFile("QWidgetSampleUI/mainwindow.ui");
+		QMainWindow mainWindow = parser.loadModelFromFile(uiFilePath);
 //		 QMainWindow mainWindow = parser.loadModelFromCode();
 
 		// Register the XMI resource factory for the .xmi extension
@@ -57,18 +65,19 @@ public class Ui2Xmi {
 		// create a resource
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.createResource(URI
-				.createURI("model/uiTestInstance.xmi"));
+				.createURI(xmiFilePath));
 		resource.getContents().add(mainWindow);
 
 		// save content
+		System.out.println("Saving model to " + xmiFilePath);
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private QMainWindow loadModelFromCode() {
 		QMainWindow mainWindow = factory.createQMainWindow();
 		mainWindow.setWindowTitle("MainWindow");
@@ -146,6 +155,7 @@ public class Ui2Xmi {
 				break;
 			default:
 				// ignore unknown property
+				// TODO add more QMainWindow properties and attributes
 				break;
 			}
 		}
@@ -209,6 +219,8 @@ public class Ui2Xmi {
 		} else if ("QHBoxLayout".equals(layoutClass)) {
 			layout = factory.createQHBoxLayout();
 		} else {
+			// ignore unknown layout
+			// TODO add more layouts
 			return null;
 		}
 		
@@ -241,6 +253,7 @@ public class Ui2Xmi {
 					break;
 				default:
 					// ignore unknown widget
+					// TODO add more widgets
 					break;
 				}
 			}
