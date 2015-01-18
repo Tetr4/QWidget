@@ -28,6 +28,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QLabel" eSuperTypes="#//QWidget">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalAlignment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="AlignLeft"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalAlignment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="AlignVCenter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QRadioButton" eSuperTypes="#//QWidget">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

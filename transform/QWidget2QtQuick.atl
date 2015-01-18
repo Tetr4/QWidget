@@ -99,6 +99,8 @@ rule Label extends Object {
 	to 
 		t : QtQuick!Label (
 			text <- s.text,
+			verticalAlignment <- s.verticalAlignment,
+			horizontalAlignment <- s.horizontalAlignment,
 			Layout_fillWidth <- true
 		)
 }

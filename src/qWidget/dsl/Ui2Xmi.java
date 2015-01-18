@@ -323,10 +323,10 @@ public class Ui2Xmi {
 		String buttonName = buttonElement.getAttribute("name");
 		radioButton.setName(buttonName);
 		
-		// text
 		List<Element> children = getChildrenByTagName(buttonElement, "property");
 		for(Element propertyElement:children) {
 			String propertyName = propertyElement.getAttribute("name");
+			//text
 			if("text".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "string");
 				if(textElement != null) {
@@ -334,6 +334,7 @@ public class Ui2Xmi {
 					radioButton.setText(text);
 				}
 			}
+			//checked
 			else if("checked".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "bool");
 				if(textElement != null) {
@@ -353,10 +354,10 @@ public class Ui2Xmi {
 		String buttonName = checkboxElement.getAttribute("name");
 		checkBox.setName(buttonName);
 		
-		// text
 		List<Element> children = getChildrenByTagName(checkboxElement, "property");
 		for(Element propertyElement:children) {
 			String propertyName = propertyElement.getAttribute("name");
+			//text
 			if("text".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "string");
 				if(textElement != null) {
@@ -364,6 +365,7 @@ public class Ui2Xmi {
 					checkBox.setText(text);
 				}
 			}
+			//checked
 			else if("checked".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "bool");
 				if(textElement != null) {
@@ -383,15 +385,36 @@ public class Ui2Xmi {
 		String buttonName = labelElement.getAttribute("name");
 		label.setName(buttonName);
 		
-		// text
 		List<Element> children = getChildrenByTagName(labelElement, "property");
 		for(Element propertyElement:children) {
 			String propertyName = propertyElement.getAttribute("name");
+			//text
 			if("text".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "string");
 				if(textElement != null) {
 					String text = parseString(textElement);
 					label.setText(text);
+				}
+			}
+			//alignment
+			else if("alignment".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "set");
+				if(textElement != null) {
+					String alignment = parseString(textElement);
+
+					if(alignment.contains("Qt::AlignTop"))
+						label.setVerticalAlignment("AlignTop");
+					else if(alignment.contains("Qt::AlignVCenter"))
+						label.setVerticalAlignment("AlignVCenter");
+					else if(alignment.contains("Qt::AlignBottom"))
+						label.setVerticalAlignment("AlignBottom");
+					
+					if(alignment.contains("Qt::AlignLeading") || alignment.contains("Qt::AlignLeft"))
+						label.setHorizontalAlignment("AlignLeft");
+					else if(alignment.contains("Qt::AlignHCenter"))
+						label.setHorizontalAlignment("AlignHCenter");
+					else if(alignment.contains("Qt::AlignTrailing") || alignment.contains("Qt::AlignRight"))
+						label.setHorizontalAlignment("AlignRight");
 				}
 			}
 		}

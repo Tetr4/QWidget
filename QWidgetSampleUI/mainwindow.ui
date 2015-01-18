@@ -20,6 +20,9 @@
       <property name="text">
        <string>Hallo Welt</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+      </property>
      </widget>
     </item>
     <item>
