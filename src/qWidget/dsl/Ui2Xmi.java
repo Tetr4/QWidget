@@ -25,6 +25,9 @@ import qWidget.QHBoxLayout;
 import qWidget.QLayout;
 import qWidget.QMainWindow;
 import qWidget.QPushButton;
+import qWidget.QRadioButton;
+import qWidget.QCheckBox;
+import qWidget.QLabel;
 import qWidget.QTextEdit;
 import qWidget.QVBoxLayout;
 import qWidget.QWidgetFactory;
@@ -208,6 +211,13 @@ public class Ui2Xmi {
 	private String parseString(Element stringElement) {
 		return stringElement.getTextContent();
 	}
+	
+	private boolean parseBoolean(Element booleanElement) {
+		if("true".equals(booleanElement.getTextContent()))
+			return true;
+		else
+			return false;
+	}
 
 	private QLayout parseLayout(Element layoutElement) {
 		QLayout layout = null;
@@ -251,6 +261,18 @@ public class Ui2Xmi {
 					QPushButton button = parseButton(innerWidgetElement);
 					layout.getContains().add(button);
 					break;
+				case "QRadioButton":
+					QRadioButton radiobutton = parseRadioButton(innerWidgetElement);
+					layout.getContains().add(radiobutton);
+					break;
+				case "QCheckBox":
+					QCheckBox checkBox = parseCheckBox(innerWidgetElement);
+					layout.getContains().add(checkBox);
+					break;
+				case "QLabel":
+					QLabel label = parseLabel(innerWidgetElement);
+					layout.getContains().add(label);
+					break;
 				default:
 					// ignore unknown widget
 					// TODO add more widgets
@@ -292,6 +314,89 @@ public class Ui2Xmi {
 		}
 		
 		return button;
+	}
+	
+	private QRadioButton parseRadioButton(Element buttonElement) {
+		QRadioButton radioButton = factory.createQRadioButton();
+		
+		// name
+		String buttonName = buttonElement.getAttribute("name");
+		radioButton.setName(buttonName);
+		
+		// text
+		List<Element> children = getChildrenByTagName(buttonElement, "property");
+		for(Element propertyElement:children) {
+			String propertyName = propertyElement.getAttribute("name");
+			if("text".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "string");
+				if(textElement != null) {
+					String text = parseString(textElement);
+					radioButton.setText(text);
+				}
+			}
+			else if("checked".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "bool");
+				if(textElement != null) {
+					boolean checked = parseBoolean(textElement);
+					radioButton.setChecked(checked);
+				}
+			}
+		}
+		
+		return radioButton;
+	}
+	
+	private QCheckBox parseCheckBox(Element checkboxElement) {
+		QCheckBox checkBox = factory.createQCheckBox();
+		
+		// name
+		String buttonName = checkboxElement.getAttribute("name");
+		checkBox.setName(buttonName);
+		
+		// text
+		List<Element> children = getChildrenByTagName(checkboxElement, "property");
+		for(Element propertyElement:children) {
+			String propertyName = propertyElement.getAttribute("name");
+			if("text".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "string");
+				if(textElement != null) {
+					String text = parseString(textElement);
+					checkBox.setText(text);
+				}
+			}
+			else if("checked".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "bool");
+				if(textElement != null) {
+					boolean checked = parseBoolean(textElement);
+					checkBox.setChecked(checked);
+				}
+			}
+		}
+		
+		return checkBox;
+	}
+	
+	private QLabel parseLabel(Element labelElement) {
+		QLabel label = factory.createQLabel();
+		
+		// name
+		String buttonName = labelElement.getAttribute("name");
+		label.setName(buttonName);
+		
+		// text
+		List<Element> children = getChildrenByTagName(labelElement, "property");
+		for(Element propertyElement:children) {
+			String propertyName = propertyElement.getAttribute("name");
+			if("text".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "string");
+				if(textElement != null) {
+					String text = parseString(textElement);
+					label.setText(text);
+				}
+			}
+		}
+		
+		return label;
 	}
 
 	private static List<Element> getChildrenByTagName(Element parent,

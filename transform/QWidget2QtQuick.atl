@@ -71,6 +71,38 @@ rule Button extends Object {
 		)
 }
 
+rule RadioButton extends Object {
+	from
+		s : QWidget!QRadioButton
+	to 
+		t : QtQuick!RadioButton (
+			text <- s.text,
+			checked <- s.checked,
+			Layout_fillWidth <- true
+		)
+}
+
+rule CheckBox extends Object {
+	from
+		s : QWidget!QCheckBox
+	to 
+		t : QtQuick!CheckBox (
+			text <- s.text,
+			checked <- s.checked,
+			Layout_fillWidth <- true
+		)
+}
+
+rule Label extends Object {
+	from
+		s : QWidget!QLabel
+	to 
+		t : QtQuick!Label (
+			text <- s.text,
+			Layout_fillWidth <- true
+		)
+}
+
 rule TextArea extends Object {
 	from
 		s : QWidget!QTextEdit
