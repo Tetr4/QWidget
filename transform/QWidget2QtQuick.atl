@@ -93,6 +93,21 @@ rule CheckBox extends Object {
 		)
 }
 
+rule Font {
+	from
+		s : QWidget!Font
+	to
+		t : QtQuick!Font (
+			family <- s.family,
+			pointsize <- s.pointsize,
+			weight <- s.weight,
+			bold <- s.bold,
+			italic <- s.italic,
+			underline <- s.underline,
+			strikeout <- s.strikeout
+		)
+}
+
 rule Label extends Object {
 	from
 		s : QWidget!QLabel
@@ -101,7 +116,8 @@ rule Label extends Object {
 			text <- s.text,
 			verticalAlignment <- s.verticalAlignment,
 			horizontalAlignment <- s.horizontalAlignment,
-			Layout_fillWidth <- true
+			Layout_fillWidth <- true,
+			font <- s.font
 		)
 }
 

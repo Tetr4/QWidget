@@ -21,6 +21,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import qWidget.Font;
+import qWidget.Geometry;
 import qWidget.QHBoxLayout;
 import qWidget.QLayout;
 import qWidget.QMainWindow;
@@ -207,6 +209,53 @@ public class Ui2Xmi {
 			}
 		}
 	}
+	
+	private Font parseFont(Element elem) {
+		Font result = factory.createFont();
+		
+		Element fontElement = getFirstChildByTagName(elem, "font");
+		if(fontElement != null) {
+			// family
+			Element familyElement = getFirstChildByTagName(fontElement, "family");
+			if(familyElement != null) {
+				result.setFamily(parseString(familyElement));
+			}
+			// pointsize
+			Element sizeElement = getFirstChildByTagName(fontElement, "pointsize");
+			if(sizeElement != null) {
+				result.setPointsize(Integer.parseInt(parseString(sizeElement)));
+			}
+			// weight
+			Element weightElement = getFirstChildByTagName(fontElement, "weight");
+			if(weightElement != null) {
+				result.setWeight(Integer.parseInt(parseString(weightElement)));
+			}
+			// bold
+			Element boldElement = getFirstChildByTagName(fontElement, "bold");
+			if(boldElement != null) {
+				result.setBold(Boolean.parseBoolean(parseString(boldElement)));
+			}
+			// italic
+			Element italicElement = getFirstChildByTagName(fontElement, "italic");
+			if(italicElement != null) {
+				result.setItalic(Boolean.parseBoolean(parseString(italicElement)));
+			}
+			// underline
+			Element underlineElement = getFirstChildByTagName(fontElement, "underline");
+			if(underlineElement != null) {
+				result.setUnderline(Boolean.parseBoolean(parseString(underlineElement)));
+			}
+			// strikout
+			Element strikoutElement = getFirstChildByTagName(fontElement, "strikeout");
+			if(strikoutElement != null) {
+				result.setStrikeout(Boolean.parseBoolean(parseString(strikoutElement)));
+			}
+		} else {
+			return null;
+		}
+		
+		return result;
+	}
 
 	private String parseString(Element stringElement) {
 		return stringElement.getTextContent();
@@ -301,9 +350,22 @@ public class Ui2Xmi {
 		button.setName(buttonName);
 		
 		// text
+		/*
 		Element propertyElement = getFirstChildByTagName(buttonElement, "property");
 		if(propertyElement != null) {
 			String propertyName = propertyElement.getAttribute("name");
+			if("text".equals(propertyName)) {
+				Element textElement = getFirstChildByTagName(propertyElement, "string");
+				if(textElement != null) {
+					String text = parseString(textElement);
+					button.setText(text);
+				}
+			}
+		}*/
+		List<Element> children = getChildrenByTagName(buttonElement, "property");
+		for(Element propertyElement:children) {
+			String propertyName = propertyElement.getAttribute("name");
+			// text
 			if("text".equals(propertyName)) {
 				Element textElement = getFirstChildByTagName(propertyElement, "string");
 				if(textElement != null) {
@@ -395,6 +457,10 @@ public class Ui2Xmi {
 					String text = parseString(textElement);
 					label.setText(text);
 				}
+			}
+			// font
+			if("font".equals(propertyName)) {
+				label.setFont(parseFont(propertyElement));
 			}
 			//alignment
 			else if("alignment".equals(propertyName)) {
