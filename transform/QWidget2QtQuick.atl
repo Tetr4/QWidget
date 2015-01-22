@@ -18,7 +18,6 @@ rule Window {
 helper context QWidget!QObject def : isRootElement() : Boolean =
 	self.refImmediateComposite().oclIsTypeOf(QWidget!QMainWindow);
 
-
 rule Object {
 	from
 		s : QWidget!QObject
@@ -35,17 +34,37 @@ rule Object {
 			then 11
 			else OclUndefined
 			endif
-		)
+		)		
 }
+
 
 rule Layout extends Object {
 	from
 		s : QWidget!QLayout
 	to 
 		t : QtQuick!Item (
-			contains <- s.contains
+			contains <- thisModule.stretchRecursive(s.contains, s.contains.size())->append(thisModule.newItem())
+			--contains <- thisModule.stretchRecursive(s.contains, s.contains.size())
 		)
 }
+
+-- add stretching Item after every QObject
+helper def : stretchRecursive(seq: Sequence(OclAny), index: Integer) : Sequence(OclAny) =
+	if index <= 0
+	then seq.debug()
+	else self.stretchRecursive(seq->insertAt(index, thisModule.newItem()), index-1)
+	endif;
+
+lazy rule newItem {
+	from
+    	e: ecore!EObject
+	to
+		i: QtQuick!Item (
+			Layout_fillHeight <- true,
+			Layout_fillWidth <- true
+		)
+}
+	
 
 rule verticalLayout extends Layout {
 	from
