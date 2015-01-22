@@ -22,14 +22,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import qWidget.Font;
-import qWidget.Geometry;
+import qWidget.QCheckBox;
 import qWidget.QHBoxLayout;
+import qWidget.QLabel;
 import qWidget.QLayout;
 import qWidget.QMainWindow;
 import qWidget.QPushButton;
 import qWidget.QRadioButton;
-import qWidget.QCheckBox;
-import qWidget.QLabel;
 import qWidget.QTextEdit;
 import qWidget.QVBoxLayout;
 import qWidget.QWidgetFactory;
