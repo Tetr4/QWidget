@@ -138,6 +138,7 @@ rule Label extends Object {
 			text <- s.text,
 			verticalAlignment <- s.verticalAlignment,
 			horizontalAlignment <- s.horizontalAlignment,
+			Layout_fillWidth <- true,
 			font <- s.font
 		)
 }
