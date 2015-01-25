@@ -32,7 +32,7 @@ rule Object {
 			
 			anchors_margins <- if (s.isRootElement())
 			then 11
-			else OclUndefined
+			else 0
 			endif
 		)		
 }
@@ -47,7 +47,7 @@ rule Layout extends Object {
 			--contains <- s.contains,
 			Layout_fillHeight <- true,
 			Layout_fillWidth <- true,
-			spacing <- 0
+			spacing <- 3
 		)
 }
 
@@ -64,8 +64,7 @@ lazy rule newItem {
 	to
 		i: QtQuick!Item (
 			Layout_fillHeight <- true,
-			Layout_fillWidth <- true,
-			anchors_margins <- 0
+			Layout_fillWidth <- true
 		)
 }
 	
@@ -139,7 +138,6 @@ rule Label extends Object {
 			text <- s.text,
 			verticalAlignment <- s.verticalAlignment,
 			horizontalAlignment <- s.horizontalAlignment,
-			Layout_fillWidth <- true,
 			font <- s.font
 		)
 }
