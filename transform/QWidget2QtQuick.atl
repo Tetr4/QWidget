@@ -43,8 +43,11 @@ rule Layout extends Object {
 		s : QWidget!QLayout
 	to 
 		t : QtQuick!Item (
-			contains <- thisModule.stretchRecursive(s.contains, s.contains.size())->append(thisModule.newItem())
-			--contains <- thisModule.stretchRecursive(s.contains, s.contains.size())
+			contains <- thisModule.stretchRecursive(s.contains, s.contains.size())->append(thisModule.newItem()),
+			--contains <- s.contains,
+			Layout_fillHeight <- true,
+			Layout_fillWidth <- true,
+			spacing <- 0
 		)
 }
 
@@ -61,7 +64,8 @@ lazy rule newItem {
 	to
 		i: QtQuick!Item (
 			Layout_fillHeight <- true,
-			Layout_fillWidth <- true
+			Layout_fillWidth <- true,
+			anchors_margins <- 0
 		)
 }
 	
